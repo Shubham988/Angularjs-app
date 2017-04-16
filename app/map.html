@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html ng-app="angular-google-maps-example">
+<head>
+        <script src="http://maps.googleapis.com/maps/api/js?sensor=false&language=en"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.3/angular.min.js"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA2-h7sDACfzro8J2l0gD4loDvK8kGSi2Q&callback=initMap"></script>
+	<script src="map.js"></script>
+	<meta charset="UTF-8">
+	<title>angular-google-maps example</title>
+	<style>
+	.angular-google-map {
+			display: block;
+		}
+	</style>
+</head>
+<body ng-controller="ExampleController">
+ <div id="searchBoxParent"></div>
+	<google-map
+		center="centerProperty"
+		zoom="zoomProperty" 
+		markers="markersProperty"
+		latitude="clickedLatitudeProperty"
+		longitude="clickedLongitudeProperty"
+		mark-click="true"
+		draggable="true"
+		style="height: 450px; width: 100%">
+	</google-map>
+	<ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true">
+    <ui-gmap-search-box template="searchbox.template" events="searchbox.events" position="BOTTOM_RIGHT"></ui-gmap-search-box>
+    <ui-gmap-marker coords="marker.coords" options="marker.options" events="marker.events" idkey="marker.id">
+         <ui-gmap-search-box options="searchbox.options" template="searchbox.template"
+                            events="searchbox.events" position="searchbox.position"></ui-gmap-search-box>
+</ui-gmap-google-map>
+	<script>
+	var module = angular.module("angular-google-maps-example", ["google-maps"]);
+	function ExampleController ($scope) {
+		angular.extend($scope, {
+			centerProperty: {
+				lat: 28.7041,
+				lng: 77.1025 
+			},
+			zoomProperty: 8,
+			markersProperty: [ {
+					latitude:  20.5937,
+					longitude: 78.9629
+				}],
+			clickedLatitudeProperty: null,	
+			clickedLongitudeProperty: null
+		});
+	}
+	</script>
+</body>
+</html>
+  
